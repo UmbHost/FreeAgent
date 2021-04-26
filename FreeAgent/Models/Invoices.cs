@@ -47,7 +47,12 @@ namespace FreeAgent
 		public string comments { get; set; }
 
 		public List<InvoiceItem> invoice_items { get; set; }
-	}
+        public PaymentMethods payment_methods { get; set; }
+    public class PaymentMethods
+    {
+		public bool paypal { get; set; }
+		public bool stripe { get; set; }
+    }
 
 	public class InvoiceItem
 	{
