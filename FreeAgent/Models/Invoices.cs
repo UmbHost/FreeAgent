@@ -51,6 +51,7 @@ namespace FreeAgent
 		public List<InvoiceItem> invoice_items { get; set; }
         public PaymentMethods payment_methods { get; set; }
         public bool send_thank_you_emails { get; set; }
+        public bool email_to_sender { get; set; }
     }
 
     public class PaymentMethods
