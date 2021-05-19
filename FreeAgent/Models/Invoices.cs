@@ -7,7 +7,8 @@ namespace FreeAgent
 	//https://api.freeagent.com/v2/contacts
 	public class Invoice : UpdatableModel, IRemoveUrlOnSerialization, IRemoveRecurringOnSerialization
 	{
-		public Invoice() : base()
+
+        public Invoice() : base()
 		{
 			invoice_items = new List<InvoiceItem>();
 		}
@@ -21,6 +22,8 @@ namespace FreeAgent
 		public string status { get; set; }
 
 		public double discount_percent { get; set; }
+
+        public string total_value { get; set; }
 
 		public string dated_on { get; set; }
 
