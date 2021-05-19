@@ -3,6 +3,7 @@ using System.Net;
 using FreeAgent.Exceptions;
 using FreeAgent.Helpers;
 using System.Collections.Generic;
+using FreeAgent.Models;
 using RestSharp;
 
 namespace FreeAgent
@@ -93,7 +94,31 @@ namespace FreeAgent
                 throw;
             }
         }
-        
+
+        public PdfInvoice GetPdf(string id)
+        {
+            try
+            {
+
+
+                var request = CreateGetPdfRequest(id);
+                var response = Client.Execute<PdfInvoice>(request);
+
+                if (response != null) return response;
+
+                return null;
+            }
+            catch (FreeAgentException fex)
+            {
+                if (fex.StatusCode == HttpStatusCode.NotFound)
+                {
+                    return null;
+                }
+
+                throw;
+            }
+        }
+
         public TSingle Put(TSingle c)
         {
             var request = CreatePutRequest(c);
@@ -128,7 +153,15 @@ namespace FreeAgent
                      
             return request;
         }
-        
+
+        protected RestRequest CreateGetPdfRequest(string id)
+        {
+            var request = CreateBasicRequest(Method.GET, "/{id}/pdf");
+            request.AddParameter("id", id, ParameterType.UrlSegment);
+
+            return request;
+        }
+
         protected RestRequest CreatePutRequest(TSingle item)
         {
             bool isNewRecord = string.IsNullOrEmpty(item.url);

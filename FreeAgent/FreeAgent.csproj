@@ -71,6 +71,7 @@
     <Compile Include="Extensions\StringExtensions.cs" />
     <Compile Include="Helpers\RequestHelper.cs" />
     <Compile Include="Models\Company.cs" />
+    <Compile Include="Models\PdfInvoice.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Models\AccessToken.cs" />
     <Compile Include="Models\Categories.cs" />

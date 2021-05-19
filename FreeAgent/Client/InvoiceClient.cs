@@ -1,6 +1,7 @@
 using System;
 using System.Collections.Generic;
 using System.IO;
+using FreeAgent.Models;
 using RestSharp;
 
 
@@ -29,6 +30,11 @@ namespace FreeAgent
         public override Invoice SingleFromWrapper(InvoiceWrapper wrapper)
         {
             return wrapper.invoice;
+        }
+
+        public PdfInvoice SingleAsPdf(string invoiceId)
+        {
+            return GetPdf(invoiceId);
         }
 
         public List<Invoice> AllForProject(string projectId)
