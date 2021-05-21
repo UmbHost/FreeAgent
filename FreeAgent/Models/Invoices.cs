@@ -7,11 +7,12 @@ namespace FreeAgent
 	//https://api.freeagent.com/v2/contacts
 	public class Invoice : UpdatableModel, IRemoveUrlOnSerialization, IRemoveRecurringOnSerialization
 	{
-
         public Invoice() : base()
 		{
 			invoice_items = new List<InvoiceItem>();
 		}
+
+        public string payment_url { get; set; }
 
 		public string reference { get; set; }
 
@@ -51,7 +52,7 @@ namespace FreeAgent
 
         public bool send_reminder_emails { get; set; }
 
-		public List<InvoiceItem> invoice_items { get; set; }
+        public List<InvoiceItem> invoice_items { get; set; }
         public PaymentMethods payment_methods { get; set; }
         public bool send_thank_you_emails { get; set; }
         public bool email_to_sender { get; set; }
