@@ -7,6 +7,8 @@ namespace FreeAgent
 	//https://api.freeagent.com/v2/contacts
 	public class Invoice : UpdatableModel, IRemoveUrlOnSerialization, IRemoveRecurringOnSerialization
 	{
+        public bool involves_sales_tax;
+
         public Invoice() : base()
 		{
 			invoice_items = new List<InvoiceItem>();
@@ -43,6 +45,8 @@ namespace FreeAgent
 		public double net_value { get; set; }
 
 		public double sales_tax_value { get; set; }
+        
+        public string place_of_supply { get; set; }
 
 		public double due_value { get; set; }
 

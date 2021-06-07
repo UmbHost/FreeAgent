@@ -2,9 +2,11 @@ using System;
 using System.Net;
 using System.Threading.Tasks;
 using FreeAgent.Authenticators;
+using FreeAgent.Client;
 using FreeAgent.Exceptions;
 using FreeAgent.Extensions;
 using FreeAgent.Helpers;
+using Newtonsoft.Json;
 using RestSharp;
 using RestSharp.Deserializers;
 
@@ -174,6 +176,7 @@ namespace FreeAgent
 		public BankTransactionClient BankTransaction = null;
 		public BankTransactionExplanationClient BankTransactionExplanation = null;
 		public BillClient Bill = null;
+        public SalesTaxClient SalesTaxClient = null;
 
 		private void SetupClients()
 		{
@@ -191,7 +194,8 @@ namespace FreeAgent
 			BankTransaction = new BankTransactionClient(this);
 			BankTransactionExplanation = new BankTransactionExplanationClient(this);
 			Bill = new BillClient(this);
-		}
+            SalesTaxClient = new SalesTaxClient(this);
+        }
 
 
 
@@ -218,19 +222,21 @@ namespace FreeAgent
 			//Console.WriteLine(_restClient.BuildUri(request));
 			response = _restClient.Execute<T>(request);
 
-			if (!IsSuccess(response.StatusCode))
+            if (!IsSuccess(response.StatusCode))
 			{
 				Console.WriteLine(response.Content);
 				throw new FreeAgentException(response);
 			}
 
-			if (response.Data == null)
+            var taxRates = JsonConvert.DeserializeObject<T>(response.Content);
+
+			if (taxRates == null)
 			{
 				Console.WriteLine("{0} returned null", _restClient.BuildUri(request));
 			}
 
 
-			return response.Data;
+			return taxRates;
 		}
 
 		internal IRestResponse Execute(IRestRequest request)

@@ -18,9 +18,6 @@ namespace FreeAgent
         public ResourceClient(FreeAgentClient client) : base(client)
         {
         }
-        
-
-
 
         public abstract TSingleWrapper WrapperFromSingle(TSingle single);
         public abstract List<TSingle> ListFromWrapper(TListWrapper wrapper);
